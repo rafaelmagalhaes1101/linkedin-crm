@@ -1435,7 +1435,7 @@ if (exportContactsButton) {
                     .slice(0, 10);
                 downloadLink.href = downloadUrl;
                 downloadLink.download =
-                    `roasce-contatos-${exportDate}.csv`;
+                    `crm-contatos-${exportDate}.csv`;
                 downloadLink.hidden = true;
                 document.body.appendChild(downloadLink);
                 try {
@@ -1583,7 +1583,7 @@ if (exportFinanceContractsButton) {
                     .slice(0, 10);
                 downloadLink.href = downloadUrl;
                 downloadLink.download =
-                    `roasce-contratos-${exportDate}.csv`;
+                    `crm-contratos-${exportDate}.csv`;
                 downloadLink.hidden = true;
                 document.body.appendChild(downloadLink);
                 try {
@@ -1730,7 +1730,7 @@ if (exportFinancePaymentsButton) {
                     .slice(0, 10);
                 downloadLink.href = downloadUrl;
                 downloadLink.download =
-                    `roasce-pagamentos-${exportDate}.csv`;
+                    `crm-pagamentos-${exportDate}.csv`;
                 downloadLink.hidden = true;
                 document.body.appendChild(downloadLink);
                 try {
@@ -1867,7 +1867,7 @@ if (exportCommercialReportButton) {
                     .slice(0, 10);
                 downloadLink.href = downloadUrl;
                 downloadLink.download =
-                    `roasce-relatorio-comercial-${exportDate}.csv`;
+                    `crm-relatorio-comercial-${exportDate}.csv`;
                 downloadLink.hidden = true;
                 document.body.appendChild(downloadLink);
                 try {
@@ -1997,7 +1997,7 @@ if (exportFinancialReportButton) {
                     .slice(0, 10);
                 downloadLink.href = downloadUrl;
                 downloadLink.download =
-                    `roasce-relatorio-financeiro-${exportDate}.csv`;
+                    `crm-relatorio-financeiro-${exportDate}.csv`;
                 downloadLink.hidden = true;
                 document.body.appendChild(downloadLink);
                 try {

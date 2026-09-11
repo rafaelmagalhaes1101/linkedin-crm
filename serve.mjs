@@ -14,4 +14,4 @@ createServer(async (req,res) => {
         if((await stat(path)).isDirectory())path=resolve(path,'index.html');
         const bytes=await readFile(path);res.writeHead(200,{'Content-Type':types[extname(path)]||'application/octet-stream'});res.end(bytes);
     } catch {res.writeHead(404,{'Content-Type':'text/plain; charset=utf-8'});res.end('Página não encontrada.');}
-}).listen(port,()=>console.log(`ROASCE CRM Demo: http://localhost:${port}`));
+}).listen(port,()=>console.log(`CRM Comercial Demo: http://localhost:${port}`));

@@ -1,7 +1,7 @@
 import { createDemoData } from './demo-data.js';
 
 // Banco local dedicado à demonstração. Nenhuma conexão externa.
-const STORAGE_KEY = 'roasce-crm-demo-v1';
+const STORAGE_KEY = 'crm-demo-v1';
 const VERSION = 1;
 export const demoActor = Object.freeze({ uid: 'demo-owner', email: 'visitante@example.com', role: 'owner', active: true });
 export class LocalTimestamp {

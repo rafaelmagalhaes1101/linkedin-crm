@@ -65,7 +65,7 @@ test('Jornada comercial, eventos, finanças, exportações e reinício', async (
         assert.deepEqual([...bytes.slice(0,3)],[239,187,191]);
         assert.ok(bytes.length>100);
     }
-    assert.ok(storage.get('roasce-crm-demo-v1').includes(contactId));
+    assert.ok(storage.get('crm-demo-v1').includes(contactId));
     resetDemo();
     assert.equal((await items('contacts')).length,originalCount);
     assert.equal((await db.collection('contacts').doc(contactId).get()).exists,false);

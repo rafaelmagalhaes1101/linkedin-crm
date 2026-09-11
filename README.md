@@ -1,12 +1,12 @@
-# ROASCE CRM — Demonstração para portfólio
+# CRM Comercial — Demonstração para portfólio
 
-Projeto independente, preparado a partir do CRM ROASCE. A página inicial apresenta o projeto e explica como explorar suas funções. O botão “Explorar demonstração” abre o CRM em `/admin/`.
+Projeto independente, preparado a partir do CRM CRM. A página inicial apresenta o projeto e explica como explorar suas funções. O botão “Explorar demonstração” abre o CRM em `/admin/`.
 
 ## Publicar em um NOVO projeto na Vercel
 
 1. Extraia o ZIP.
-2. Crie um repositório separado, por exemplo `roasce-crm-demo`.
-3. Coloque o CONTEÚDO da pasta `roasce-crm-demo` na raiz desse repositório. `index.html`, `vercel.json` e `package.json` devem ficar nessa raiz.
+2. Crie um repositório separado, por exemplo `crm-demo`.
+3. Coloque o CONTEÚDO da pasta `crm-demo` na raiz desse repositório. `index.html`, `vercel.json` e `package.json` devem ficar nessa raiz.
 4. Importe esse novo repositório como um NOVO projeto na Vercel.
 5. Use estas configurações:
 
@@ -44,7 +44,7 @@ Referência oficial das opções de publicação: [Configuração de build da Ve
 
 A demonstração começa com 24 contatos fictícios, seis contratos e exemplos de pagamentos e atividades. As datas são relativas ao momento da primeira abertura ou do reinício.
 
-Os dados ficam no `localStorage`, na chave `roasce-crm-demo-v1`. Ao recarregar, o visitante mantém suas alterações no mesmo navegador e endereço. Outros visitantes, dispositivos ou perfis do navegador têm seus próprios dados. Abas do mesmo navegador e endereço compartilham os dados; não se trata de um banco multiusuário.
+Os dados ficam no `localStorage`, na chave `crm-demo-v1`. Ao recarregar, o visitante mantém suas alterações no mesmo navegador e endereço. Outros visitantes, dispositivos ou perfis do navegador têm seus próprios dados. Abas do mesmo navegador e endereço compartilham os dados; não se trata de um banco multiusuário.
 
 O botão “Reiniciar demonstração” recria o cenário inicial com datas atualizadas. Se o armazenamento estiver bloqueado ou cheio, a interface avisa e mantém a sessão em memória, mas as alterações podem não persistir após sair.
 

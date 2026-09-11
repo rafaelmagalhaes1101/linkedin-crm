@@ -216,7 +216,7 @@ export default async function handler(request, response) {
         );
         response.setHeader(
             "Content-Disposition",
-            `attachment; filename="roasce-pagamentos-${exportDate}.csv"`
+            `attachment; filename="crm-pagamentos-${exportDate}.csv"`
         );
         return response.status(200).send(csv);
     } catch (error) {
