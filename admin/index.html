@@ -1,0 +1,2170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <meta
+        name="robots"
+        content="noindex, nofollow"
+    >
+    <title>
+        Demonstração interativa | ROASCE CRM
+    </title>
+    
+    
+    
+    <link
+        rel="stylesheet"
+        href="/admin/admin.css"
+    >
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/admin/demo.css">
+</head>
+<body>
+    <section class="login-screen" id="loginScreen" aria-live="polite">
+      <div class="login-card"><span class="login-label">ROASCE · DEMONSTRAÇÃO</span>
+      <h1>Preparando seu CRM</h1><p>Carregando os dados fictícios deste navegador.</p>
+      <p class="login-error" id="loginError"></p>
+      <button id="loginButton" class="login-button" onclick="location.reload()">Recarregar</button>
+      <p><a href="/">Voltar à apresentação</a></p></div>
+    </section>
+    <!-- ========================================
+         PAINEL
+    ========================================= -->
+    <div
+        class="admin-app hidden"
+        id="adminApp"
+    >
+        <!-- HEADER -->
+        <header class="admin-header">
+            <div class="admin-header-container">
+                <div class="admin-brand">
+                    <img
+                        src="/assets/roasce-admin-header.png"
+                        alt="ROASCE"
+                    >
+                    <div>
+                        <span>
+                            PAINEL
+                        </span>
+                        <strong id="adminSectionName">
+                            Dashboard
+                        </strong>
+                    </div>
+                </div>
+                <div class="admin-user">
+                    <span
+                        id="adminEmailDisplay"
+                    ></span>
+                    <button
+                        type="button"
+                        id="logoutButton"
+                        class="logout-button"
+                    >
+                        Sobre o projeto
+                    </button>
+                </div>
+            </div>
+        </header>
+        <aside class="demo-banner" aria-label="Informações da demonstração">
+          <div><strong>Demonstração interativa</strong><span>Dados fictícios · alterações apenas neste navegador</span></div>
+          <div class="demo-banner-actions"><button type="button" id="demoGuideButton" aria-expanded="false" aria-controls="demoGuide">Como explorar</button><button type="button" id="demoResetButton">Reiniciar demonstração</button></div>
+        </aside>
+        <div class="demo-storage-warning" id="demoStorageWarning" role="status" hidden></div>
+        <section class="demo-guide" id="demoGuide" hidden>
+          <h2>Um roteiro para começar</h2>
+          <ol><li><strong>Conheça o Dashboard.</strong> Explore o período, os gráficos e os próximos contatos.</li><li><strong>Crie uma oportunidade.</strong> Em Contatos, clique em Novo lead e use dados fictícios.</li><li><strong>Avance a negociação.</strong> Abra o lead, agende um retorno ou altere seu status.</li><li><strong>Feche a venda.</strong> Escolha Fechado, informe o contrato e acompanhe os pagamentos em Financeiro.</li></ol>
+          <p>As ações também aparecem em Atividade recente e Auditoria. As exportações usam os filtros aplicados.</p>
+        </section>
+        <dialog id="demoResetDialog" class="demo-reset-dialog"><h2>Reiniciar a demonstração?</h2><p>Os dados fictícios iniciais serão restaurados. As alterações feitas neste navegador serão removidas.</p><div><button id="demoResetCancel" type="button">Continuar explorando</button><button id="demoResetConfirm" type="button">Reiniciar dados</button></div></dialog>
+        <!-- CONTEÚDO -->
+        <main class="admin-main">
+           <div class="admin-container">
+                <nav class="admin-tabs">
+                    <button
+                        type="button"
+                        class="admin-tab active"
+                        id="dashboardTabButton"
+                    >
+                        Dashboard
+                    </button>
+                    <button
+                        type="button"
+                        class="admin-tab"
+                        id="contactsTabButton"
+                    >
+                        Contatos
+                    </button>
+                    <button
+                        type="button"
+                        class="admin-tab hidden"
+                        id="auditTabButton"
+                    >
+                        Auditoria
+                    </button>
+                    <button
+                        type="button"
+                        class="admin-tab hidden"
+                        id="financeTabButton"
+                    >
+                        Financeiro
+                    </button>
+                </nav>
+                <!-- ========================================
+                     DASHBOARD
+                ========================================= -->
+                <section
+                    class="dashboard-view"
+                    id="dashboardView"
+                >
+                    <!-- ========================================
+                         VISÃO GERAL — INDICADORES
+                    ========================================= -->
+                    <div class="dashboard-overview">
+                        <div class="dashboard-overview-heading">
+                            <div>
+                                <span class="section-label">
+                                    INDICADORES
+                                </span>
+                                <h2>
+                                    Visão geral
+                                </h2>
+                            </div>
+                            <div class="live-status">
+                                <span></span>
+                                Dados demonstrativos atualizados
+                            </div>
+                        </div>
+                        <div class="dashboard-overview-grid">
+                            <!-- TOTAL -->
+                            <article
+                                class="
+                                    dashboard-metric-card
+                                    dashboard-metric-total
+                                "
+                            >
+                                <div class="dashboard-metric-top">
+                                    <span class="dashboard-metric-dot"></span>
+                                    <span>
+                                        Total de leads
+                                    </span>
+                                </div>
+                                <strong id="dashboardMetricTotal">
+                                    0
+                                </strong>
+                                <small>
+                                    Todos os registros do CRM
+                                </small>
+                            </article>
+                            <!-- NOVOS -->
+                            <article
+                                class="
+                                    dashboard-metric-card
+                                    dashboard-metric-new
+                                "
+                            >
+                                <div class="dashboard-metric-top">
+                                    <span class="dashboard-metric-dot"></span>
+                                    <span>
+                                        Novos
+                                    </span>
+                                </div>
+                                <strong id="dashboardMetricNew">
+                                    0
+                                </strong>
+                                <small>
+                                    Aguardando primeiro atendimento
+                                </small>
+                            </article>
+                            <!-- FECHADOS -->
+                            <article
+                                class="
+                                    dashboard-metric-card
+                                    dashboard-metric-closed
+                                "
+                            >
+                                <div class="dashboard-metric-top">
+                                    <span class="dashboard-metric-dot"></span>
+                                    <span>
+                                        Fechados
+                                    </span>
+                                </div>
+                                <strong id="dashboardMetricClosed">
+                                    0
+                                </strong>
+                                <small>
+                                    Vendas concluídas no período
+                                </small>
+                            </article>
+                            <!-- PERDIDOS -->
+                            <article
+                                class="
+                                    dashboard-metric-card
+                                    dashboard-metric-lost
+                                "
+                            >
+                                <div class="dashboard-metric-top">
+                                    <span class="dashboard-metric-dot"></span>
+                                    <span>
+                                        Perdidos
+                                    </span>
+                                </div>
+                                <strong id="dashboardMetricLost">
+                                    0
+                                </strong>
+                                <small>
+                                    Oportunidades não convertidas
+                                </small>
+                            </article>
+                            <!-- CONVERSÃO -->
+                            <article
+                                class="
+                                    dashboard-metric-card
+                                    dashboard-metric-conversion
+                                "
+                            >
+                                <div class="dashboard-metric-top">
+                                    <span class="dashboard-metric-dot"></span>
+                                    <span>
+                                        Conversão
+                                    </span>
+                                </div>
+                                <strong id="dashboardMetricConversion">
+                                    0,0%
+                                </strong>
+                                <small>
+                                    Fechamentos ÷ leads gerados
+                                </small>
+                            </article>
+                        </div>
+                    </div>
+                    <!-- ========================================
+                         GRÁFICOS DO DASHBOARD
+                    ========================================= -->
+                    <div class="dashboard-charts-heading">
+                        <div>
+                            <span class="section-label">
+                                ANÁLISE VISUAL
+                            </span>
+                            <h2>
+                                Distribuição dos leads
+                            </h2>
+                                <label
+                                    class="dashboard-period-control"
+                                    for="dashboardPeriodFilter"
+                                >
+                                    <span>
+                                        Período
+                                    </span>
+                                    <select
+                                        id="dashboardPeriodFilter"
+                                    >
+                                        <option value="all">
+                                            Todo o período
+                                        </option>
+                                        <option value="today">
+                                            Hoje
+                                        </option>
+                                        <option value="7d">
+                                            Últimos 7 dias
+                                        </option>
+                                        <option value="30d">
+                                            Últimos 30 dias
+                                        </option>
+                                        <option value="90d">
+                                            Últimos 90 dias
+                                        </option>
+                                        <option value="month">
+                                            Este mês
+                                        </option>
+                                        <option value="year">
+                                            Este ano
+                                        </option>
+                                    </select>
+                                    <small id="dashboardPeriodSummary">
+                                        Todos os registros do CRM
+                                    </small>
+                                </label>
+                        </div>      
+                        <div class="dashboard-report-actions">
+                            <button
+                                type="button"
+                                class="new-contact-button hidden"
+                                id="exportCommercialReportButton"
+                                disabled
+                            >
+                                Exportar relatório comercial
+                            </button>
+                            <button
+                                type="button"
+                                class="new-contact-button hidden"
+                                id="exportFinancialReportButton"
+                                disabled
+                            >
+                                Exportar relatório financeiro
+                            </button>
+                        </div>
+                    </div>
+                    <div class="dashboard-charts-grid">
+                        <!-- ========================================
+                             STATUS DOS LEADS
+                        ========================================= -->
+                        <article
+                            class="
+                                dashboard-chart-card
+                                dashboard-status-chart-card
+                            "
+                        >
+                            <div class="dashboard-chart-card-heading">
+                                <div>
+                                    <span>
+                                        FUNIL COMERCIAL
+                                    </span>
+                                    <h3>
+                                        Leads por status
+                                    </h3>
+                                </div>
+                                <small>
+                                    Distribuição atual
+                                </small>
+                            </div>
+                            <div class="dashboard-donut-layout">
+                                <div class="dashboard-donut-container">
+                                    <canvas
+                                        id="dashboardStatusChart"
+                                        role="img"
+                                        aria-label="Distribuição dos leads por status"
+                                    ></canvas>
+                                    <div
+                                        class="dashboard-donut-center"
+                                        id="dashboardStatusCenter"
+                                    >
+                                        <strong
+                                            id="dashboardStatusCenterValue"
+                                        >
+                                            0
+                                        </strong>
+                                        <span
+                                            id="dashboardStatusCenterLabel"
+                                        >
+                                            Total de leads
+                                        </span>
+                                        <small
+                                            id="dashboardStatusCenterPercent"
+                                        >
+                                            —
+                                        </small>
+                                    </div>
+                                </div>
+                                <div
+                                    class="dashboard-chart-legend"
+                                    id="dashboardStatusLegend"
+                                ></div>
+                            </div>
+                        </article>
+                       <!-- ========================================
+                             ORIGEM DOS LEADS
+                        ========================================= -->
+                        <article
+                            class="
+                                dashboard-chart-card
+                                dashboard-origin-chart-card
+                            "
+                        >
+                            <div class="dashboard-chart-card-heading">
+                                <div>
+                                    <span>
+                                        AQUISIÇÃO
+                                    </span>
+                                    <h3>
+                                        Origem dos leads
+                                    </h3>
+                                </div>
+                                <small>
+                                    Distribuição atual
+                                </small>
+                            </div>
+                            <div class="dashboard-donut-layout">
+                                <div class="dashboard-donut-container">
+                                    <canvas
+                                        id="dashboardOriginChart"
+                                        role="img"
+                                        aria-label="Distribuição dos leads por origem"
+                                    ></canvas>
+                                    <div
+                                        class="dashboard-donut-center"
+                                        id="dashboardOriginCenter"
+                                    >
+                                        <strong
+                                            id="dashboardOriginCenterValue"
+                                        >
+                                            0
+                                        </strong>
+                                        <span
+                                            id="dashboardOriginCenterLabel"
+                                        >
+                                            Total de leads
+                                        </span>
+                                        <small
+                                            id="dashboardOriginCenterPercent"
+                                        >
+                                            —
+                                        </small>
+                                    </div>
+                                </div>
+                                <div
+                                    class="dashboard-chart-legend"
+                                    id="dashboardOriginLegend"
+                                ></div>
+                            </div>
+                        </article>
+                        <!-- ========================================
+                             SERVIÇOS MAIS PROCURADOS
+                        ========================================= -->
+                        <article
+                            class="
+                                dashboard-chart-card
+                                dashboard-service-chart-card
+                            "
+                        >
+                            <div class="dashboard-chart-card-heading">
+                                <div>
+                                    <span>
+                                        DEMANDA
+                                    </span>
+                                    <h3>
+                                        Serviços mais procurados
+                                    </h3>
+                                </div>
+                                <small>
+                                    Distribuição atual
+                                </small>
+                            </div>
+                            <div class="dashboard-donut-layout">
+                                <div class="dashboard-donut-container">
+                                    <canvas
+                                        id="dashboardServiceChart"
+                                        role="img"
+                                        aria-label="Distribuição dos leads por serviço"
+                                    ></canvas>
+                                    <div
+                                        class="dashboard-donut-center"
+                                        id="dashboardServiceCenter"
+                                    >
+                                        <strong
+                                            id="dashboardServiceCenterValue"
+                                        >
+                                            0
+                                        </strong>
+                                        <span
+                                            id="dashboardServiceCenterLabel"
+                                        >
+                                            Total de leads
+                                        </span>
+                                        <small
+                                            id="dashboardServiceCenterPercent"
+                                        >
+                                            —
+                                        </small>
+                                    </div>
+                                </div>
+                                <div
+                                    class="dashboard-chart-legend"
+                                    id="dashboardServiceLegend"
+                                ></div>
+                            </div>
+                        </article>
+                        <!-- ========================================
+                             FINANCEIRO — PRÓXIMA ETAPA
+                        ========================================= -->
+                        <!-- ========================================
+                             CARTEIRA FINANCEIRA — OWNER
+                        ========================================= -->
+                        <article
+                            class="
+                                dashboard-chart-card
+                                dashboard-finance-chart-card
+                                hidden
+                            "
+                            id="dashboardFinanceCard"
+                        >
+                            <div class="dashboard-chart-card-heading">
+                                <div>
+                                    <span>
+                                        GESTÃO FINANCEIRA
+                                    </span>
+                                    <h3>
+                                        Carteira em aberto
+                                    </h3>
+                                </div>
+                                <small>
+                                    Somente owner
+                                </small>
+                            </div>
+                            <div class="dashboard-donut-layout">
+                                <div class="dashboard-donut-container">
+                                    <canvas
+                                        id="dashboardFinanceChart"
+                                        role="img"
+                                        aria-label="Distribuição da carteira financeira em aberto"
+                                    ></canvas>
+                                    <div
+                                        class="dashboard-donut-center"
+                                        id="dashboardFinanceCenter"
+                                    >
+                                        <strong
+                                            id="dashboardFinanceCenterValue"
+                                        >
+                                            R$ 0,00
+                                        </strong>
+                                        <span
+                                            id="dashboardFinanceCenterLabel"
+                                        >
+                                            Total em aberto
+                                        </span>
+                                        <small
+                                            id="dashboardFinanceCenterPercent"
+                                        >
+                                            —
+                                        </small>
+                                    </div>
+                                </div>
+                                <div
+                                    class="dashboard-chart-legend"
+                                    id="dashboardFinanceLegend"
+                                ></div>
+                            </div>
+                            <p class="dashboard-finance-note">
+                                A rosca considera apenas cobranças atualmente
+                                em aberto. Valores já recebidos não entram
+                                nesta distribuição.
+                            </p>
+                        </article>
+                    </div>
+                    <!-- ========================================
+                         FOLLOW-UPS E ALERTAS
+                    ========================================= -->
+                    <div class="dashboard-followups">
+                        <div class="dashboard-followups-heading">
+                            <div>
+                                <span class="section-label">
+                                    ACOMPANHAMENTO
+                                </span>
+                                <h2>
+                                    Follow-ups e alertas
+                                </h2>
+                                <p>
+                                    Contatos que precisam de atenção na operação comercial.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="dashboard-followup-summary">
+                            <article
+                                class="
+                                    dashboard-followup-summary-card
+                                    dashboard-followup-overdue
+                                "
+                                data-followup-filter="overdue"
+                                role="button"
+                                tabindex="0"
+                                aria-pressed="false"
+                            >
+                                <span>
+                                    Vencidos
+                                </span>
+                                <strong id="dashboardFollowupOverdue">
+                                    0
+                                </strong>
+                                <small>
+                                    Precisam de atenção
+                                </small>
+                            </article>
+                            <article
+                                class="
+                                    dashboard-followup-summary-card
+                                    dashboard-followup-today
+                                "
+                                data-followup-filter="today"
+                                role="button"
+                                tabindex="0"
+                                aria-pressed="false"
+                            >
+                                <span>
+                                    Hoje
+                                </span>
+                                <strong id="dashboardFollowupToday">
+                                    0
+                                </strong>
+                                <small>
+                                    Contatos programados
+                                </small>
+                            </article>
+                            <article
+                                class="
+                                    dashboard-followup-summary-card
+                                    dashboard-followup-upcoming
+                                "
+                                data-followup-filter="upcoming"
+                                role="button"
+                                tabindex="0"
+                                aria-pressed="false"
+                            >
+                                <span>
+                                    Próximos
+                                </span>
+                                <strong id="dashboardFollowupUpcoming">
+                                    0
+                                </strong>
+                                <small>
+                                    Agendados futuramente
+                                </small>
+                            </article>
+                        </div>
+                        <div
+                            class="dashboard-followup-list"
+                            id="dashboardFollowupList"
+                        >
+                            <div class="dashboard-followup-empty">
+                                Nenhum follow-up para exibir.
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ========================================
+                         ATIVIDADE RECENTE
+                    ========================================= -->
+                    <div class="dashboard-activity">
+                        <div class="dashboard-activity-heading">
+                            <div>
+                                <span class="section-label">
+                                    MOVIMENTAÇÕES
+                                </span>
+                                <h2>
+                                    Atividade recente
+                                </h2>
+                                <p>
+                                    Últimas movimentações relevantes da operação.
+                                </p>
+                            </div>
+                            <span
+                                class="dashboard-activity-status"
+                                id="dashboardActivityStatus"
+                            >
+                                Atualização automática
+                            </span>
+                        </div>
+                        <div
+                            class="dashboard-activity-list"
+                            id="dashboardActivityList"
+                        >
+                            <div class="dashboard-activity-empty">
+                                Nenhuma atividade recente para exibir.
+                            </div>
+                        </div>
+                    </div>
+             </section>
+       <section
+            id="contactsView"
+            class="hidden"
+        >
+           <div
+                id="contactsPeriodNotice"
+                class="contacts-period-notice hidden"
+                role="status"
+            >
+                <span id="contactsPeriodText"></span>
+                <button
+                    type="button"
+                    id="clearContactsPeriodButton"
+                >
+                    Limpar período
+                </button>
+            </div>
+                <!-- TOPO -->
+                <div class="dashboard-heading">
+                    <div>
+                        <span class="section-label">
+                            VISÃO GERAL
+                        </span>
+                        <h1>
+                            Contatos recebidos
+                        </h1>
+                        <p>
+                            Acompanhe as solicitações enviadas
+                            pelo site da ROASCE.
+                        </p>
+                    </div>
+                    <div class="dashboard-heading-actions">
+                        <button
+                            type="button"
+                            class="new-contact-button"
+                            id="openManualContactButton"
+                        >
+                            <span aria-hidden="true">
+                                +
+                            </span>
+                            Novo lead
+                        </button>
+                        <div class="live-status">
+                            <span></span>
+                            Atualização local automática
+                        </div>
+                    </div>
+                </div>
+                <!-- ========================================
+                     MÉTRICAS
+                ========================================= -->
+                <div class="admin-metrics">
+                    <div class="admin-metric">
+                        <span>
+                            Total
+                        </span>
+                        <strong id="metricTotal">
+                            0
+                        </strong>
+                    </div>
+                    <div class="admin-metric">
+                        <span>
+                            Novos
+                        </span>
+                        <strong id="metricNew">
+                            0
+                        </strong>
+                    </div>
+                    <div class="admin-metric">
+                        <span>
+                            Em contato
+                        </span>
+                        <strong id="metricContact">
+                            0
+                        </strong>
+                    </div>
+                    <div class="admin-metric">
+                        <span>
+                            Propostas
+                        </span>
+                        <strong id="metricProposal">
+                            0
+                        </strong>
+                    </div>
+                    <div class="admin-metric">
+                        <span>
+                            Fechados
+                        </span>
+                        <strong id="metricClosed">
+                            0
+                        </strong>
+                    </div>
+                </div>
+                <!-- ========================================
+                     ATIVOS / ARQUIVADOS
+                ========================================= -->
+                <div class="contacts-list-toolbar">
+                    <div class="contacts-view-switch">
+                        <button
+                            type="button"
+                            class="contacts-view-button active"
+                            id="activeContactsButton"
+                            aria-pressed="true"
+                        >
+                            <span>Ativos</span>
+                            <strong id="activeContactsCount">0</strong>
+                        </button>
+                        <button
+                            type="button"
+                            class="contacts-view-button"
+                            id="archivedContactsButton"
+                            aria-pressed="false"
+                        >
+                            <span>Arquivados</span>
+                            <strong id="archivedContactsCount">0</strong>
+                        </button>
+                    </div>
+                </div>
+                <!-- ========================================
+                     FERRAMENTAS
+                ========================================= -->
+                <div class="contacts-date-filter">
+                    <div class="contacts-date-field">
+                        <label for="contactsCreatedFrom">
+                            Criado de
+                        </label>
+                        <input
+                            type="date"
+                            id="contactsCreatedFrom"
+                        >
+                    </div>
+                    <div class="contacts-date-field">
+                        <label for="contactsCreatedTo">
+                            Criado até
+                        </label>
+                        <input
+                            type="date"
+                            id="contactsCreatedTo"
+                        >
+                    </div>
+                    <button
+                        type="button"
+                        class="new-contact-button"
+                        id="applyContactsDateButton"
+                        disabled
+                    >
+                        Aplicar período    
+                    </button>
+                    <button
+                        type="button"
+                        class="new-contact-button"
+                        id="clearContactsFiltersButton"
+                    >
+                        Limpar filtros
+                    </button>
+                    <button
+                        type="button"
+                        class="new-contact-button hidden"
+                        id="exportContactsButton"
+                        disabled
+                    >
+                        Exportar CSV
+                    </button>
+                    <span
+                        id="contactsDateError"
+                        class="contacts-date-error"
+                        role="alert"
+                    ></span>
+                </div>
+                <div class="admin-tools">
+                        <div class="admin-search">
+                            <svg
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+                                <circle
+                                    cx="11"
+                                    cy="11"
+                                    r="7"
+                                ></circle>
+                                <path
+                                    d="M20 20L16.2 16.2"
+                                ></path>
+                            </svg>
+                            <input
+                                type="search"
+                                id="contactSearch"
+                                placeholder="Buscar por nome, empresa, contato ou tag..."
+                            >
+                        </div>
+                        <select
+                            id="statusFilter"
+                            class="status-filter contact-filter"
+                        >
+                            <option value="todos">
+                                Todos os status
+                            </option>
+                            <option value="novo">
+                                Novos
+                            </option>
+                            <option value="em_contato">
+                                Em contato
+                            </option>
+                            <option value="follow_up">
+                                Follow-up
+                            </option>
+                            <option value="proposta">
+                                Proposta
+                            </option>
+                            <option value="aguardando_cliente">
+                                Aguardando cliente
+                            </option>
+                            <option value="perdido">
+                                Perdidos
+                            </option>
+                        </select>
+                        <select
+                            id="originFilter"
+                            class="contact-filter"
+                        >
+                            <option value="todos">
+                                Todas as origens
+                            </option>
+                            <option value="site">
+                                Site
+                            </option>
+                            <option value="instagram">
+                                Instagram
+                            </option>
+                            <option value="whatsapp">
+                                WhatsApp
+                            </option>
+                            <option value="indicacao">
+                                Indicação
+                            </option>
+                            <option value="prospeccao">
+                                Prospecção
+                            </option>
+                            <option value="evento">
+                                Evento
+                            </option>
+                            <option value="google">
+                                Google
+                            </option>
+                            <option value="outro">
+                                Outro
+                            </option>
+                            <option value="nao_informado">
+                                Não informado
+                            </option>
+                        </select>
+                        <select
+                            id="tagFilter"
+                            class="contact-filter"
+                        >
+                            <option value="todos">
+                                Todas as tags
+                            </option>
+                        </select>
+                    <select
+                        id="serviceFilter"
+                        class="contact-filter"
+                        aria-label="Filtrar contatos por serviço"
+                    >
+                        <option value="todos">Todos os serviços</option>
+                        <option value="trafego_pago">Tráfego Pago</option>
+                        <option value="gestao_total">Gestão Total</option>
+                        <option value="criacao_sites">Criação de Sites</option>
+                        <option value="consultoria">Consultoria</option>
+                        <option value="projeto_personalizado">
+                            Projeto personalizado
+                        </option>
+                        <option value="outro">Outro serviço</option>
+                        <option value="nao_definido">Não definido</option>
+                    </select>
+                    <select
+                        id="contactFollowupFilter"
+                        class="contact-filter"
+                        aria-label="Filtrar contatos por próximo contato"
+                    >
+                        <option value="todos">Todos os follow-ups</option>
+                        <option value="sem_agendamento">Sem agendamento</option>
+                        <option value="vencidos">Vencidos</option>
+                        <option value="hoje">Hoje — a vencer</option>
+                        <option value="proximos">Próximos</option>
+                    </select>
+                    </div>
+                <!-- ========================================
+                     LISTA
+                ========================================= -->
+                <div
+                    class="contacts-list"
+                    id="contactsList"
+                >
+                    <div class="loading-state">
+                        <span class="loader"></span>
+                        Carregando contatos...
+                    </div>
+                </div>
+            </section>
+            <!-- ========================================
+                 AUDITORIA
+            ========================================= -->
+                <section
+                    class="audit-view hidden"
+                    id="auditView"
+                >
+                    <div class="dashboard-heading audit-heading">
+                        <div>
+                            <span class="section-label">
+                                CONTROLE INTERNO
+                            </span>
+                            <h1>
+                                Auditoria
+                            </h1>
+                            <p>
+                                Registro das alterações realizadas
+                                pelos usuários do painel.
+                            </p>
+                        </div>
+                        <div class="audit-count">
+                            <span id="auditCount">
+                                0 registros
+                            </span>
+                        </div>
+                    </div>
+            <!-- ========================================
+                 FILTROS DA AUDITORIA
+            ========================================= -->
+            <div class="audit-filters">
+                <div class="audit-search">
+                    <input
+                        type="search"
+                        id="auditSearch"
+                        placeholder="Buscar por lead ou empresa..."
+                        autocomplete="off"
+                    >
+                </div>
+                <select id="auditUserFilter">
+                    <option value="todos">
+                        Todos os usuários
+                    </option>
+                </select>
+                <select id="auditPeriodFilter">
+                    <option value="todos">
+                        Todo o período
+                    </option>
+                    <option value="hoje">
+                        Hoje
+                    </option>
+                    <option value="7">
+                        Últimos 7 dias
+                    </option>
+                    <option value="30">
+                        Últimos 30 dias
+                    </option>
+                </select>
+                <select id="auditChangeFilter">
+                    <option value="todos">
+                        Todas as alterações
+                    </option>
+                    <option value="created">
+                        Criação de lead
+                    </option>
+                    <option value="status">
+                        Status
+                    </option>
+                    <option value="nextContactAt">
+                        Próximo contato
+                    </option>
+                    <option value="notes">
+                        Observações
+                    </option>
+                    <option value="origin">
+                        Origem
+                    </option>
+                    <option value="tags">
+                        Tags
+                    </option>
+                    <option value="archived">
+                        Arquivamento
+                    </option>
+                    <option value="financeiro">
+                        Financeiro
+                    </option>
+                </select>
+                <button
+                    type="button"
+                    class="audit-clear-filters"
+                    id="auditClearFilters"
+                >
+                    Limpar
+                </button>
+            </div>
+                    <div
+                        class="audit-list"
+                        id="auditList"
+                    >
+                        <div class="loading-state">
+                            Selecione Auditoria para carregar os registros.
+                        </div>
+                    </div>
+                </section>
+            <!-- ========================================
+                 FINANCEIRO — OWNER
+            ========================================= -->
+            <section
+                class="finance-view hidden"
+                id="financeView"
+            >
+                <div class="dashboard-heading finance-heading">
+                    <div>
+                        <span class="section-label">
+                            GESTÃO FINANCEIRA
+                        </span>
+                        <h1>
+                            Financeiro
+                        </h1>
+                        <p>
+                            Acompanhe contratos fechados,
+                            recebimentos e informações financeiras.
+                        </p>
+                    </div>
+                </div>
+                <!-- ========================================
+                     INDICADORES FINANCEIROS
+                ========================================= -->
+                <div class="finance-metrics">
+                    <div class="finance-metric">
+                        <span>
+                            Mensal contratado
+                        </span>
+                        <strong id="financeMetricMonthly">
+                            R$ 0,00
+                        </strong>
+                        <small>
+                            Base mensal dos contratos recorrentes
+                        </small>
+                    </div>
+                    <div class="finance-metric">
+                        <span>
+                            Pontual contratado
+                        </span>
+                        <strong id="financeMetricOneTime">
+                            R$ 0,00
+                        </strong>
+                        <small>
+                            Valor das vendas de cobrança única
+                        </small>
+                    </div>
+                    <div class="finance-metric finance-metric-received">
+                        <span>
+                            Recebido
+                        </span>
+                        <strong id="financeMetricReceived">
+                            R$ 0,00
+                        </strong>
+                        <small>
+                            Pagamentos efetivamente registrados
+                        </small>
+                    </div>
+                    <div class="finance-metric">
+                        <span>
+                            Pendente
+                        </span>
+                        <strong id="financeMetricPending">
+                            R$ 0,00
+                        </strong>
+                        <small>
+                            Cobranças atuais ainda no prazo
+                        </small>
+                    </div>
+                    <div class="finance-metric finance-metric-overdue">
+                        <span>
+                            Em atraso
+                        </span>
+                        <strong id="financeMetricOverdue">
+                            R$ 0,00
+                        </strong>
+                        <small>
+                            Cobranças atuais vencidas
+                        </small>
+                    </div>
+                </div>
+            <div class="finance-list-heading">
+                <div>
+                    <span class="section-label">
+                        CONTRATOS FECHADOS
+                    </span>
+                    <h2>
+                        Vendas registradas
+                    </h2>
+                </div>
+                <div class="finance-export-actions">
+                    <button
+                        type="button"
+                        class="new-contact-button hidden"
+                        id="exportFinanceContractsButton"
+                        disabled
+                    >
+                        Exportar contratos
+                    </button>
+                    <button
+                        type="button"
+                        class="new-contact-button hidden"
+                        id="exportFinancePaymentsButton"
+                        disabled
+                    >
+                        Exportar pagamentos
+                    </button>
+                    <span
+                        class="finance-count"
+                        id="financeCount"
+                    >
+                        0 contratos
+                    </span>
+                </div>
+            </div>
+                <div class="finance-filters">
+                <div class="finance-filter-field">
+                    <label for="financeClosedFrom">
+                        Fechado de
+                    </label>
+                    <input
+                        type="date"
+                        id="financeClosedFrom"
+                    >
+                </div>
+                <div class="finance-filter-field">
+                    <label for="financeClosedTo">
+                        Fechado até
+                    </label>
+                    <input
+                        type="date"
+                        id="financeClosedTo"
+                    >
+                </div>
+                <div class="finance-filter-field">
+                    <label for="financeBillingFilter">
+                        Tipo de cobrança
+                    </label>
+                    <select id="financeBillingFilter">
+                        <option value="todos">Todos os tipos</option>
+                        <option value="monthly">Mensal</option>
+                        <option value="one_time">Pontual</option>
+                    </select>
+                </div>
+                <div class="finance-filter-field">
+                    <label for="financePaymentStatusFilter">
+                        Situação do pagamento
+                    </label>
+                    <select id="financePaymentStatusFilter">
+                        <option value="todos">Todas as situações</option>
+                        <option value="pending_all">Pendente + Em dia</option>
+                        <option value="pending">Pendente</option>
+                        <option value="overdue">Em atraso</option>
+                        <option value="up_to_date">Em dia</option>
+                        <option value="paid">Pago</option>
+                    </select>
+                </div>
+                <button
+                    type="button"
+                    class="new-contact-button"
+                    id="applyFinanceFiltersButton"
+                    disabled
+                >
+                    Aplicar filtros
+                </button>
+                <button
+                    type="button"    
+                    class="new-contact-button"
+                    id="clearFinanceFiltersButton"
+                    disabled
+                >
+                    Limpar filtros
+                </button>
+                <span
+                    id="financeFiltersError"
+                    class="finance-filters-error"
+                    role="alert"
+                ></span>
+            </div>
+                    <div class="finance-table">
+                        <div class="finance-table-scroll">
+                            <div class="finance-table-header">
+                                <span>Cliente</span>
+                                <span>Vendedor</span>
+                                <span>Fechado em</span>
+                                <span>Contrato</span>
+                                <span>Pagamento</span>
+                                <span>Situação</span>
+                            </div>
+                            <div
+                                class="finance-list"
+                                id="financeList"
+                            >
+                                <div class="finance-loading">
+                                    Selecione Financeiro para carregar os contratos.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    <!-- ========================================
+         MODAL DO CONTATO
+    ========================================= -->
+    <div
+        class="contact-modal hidden"
+        id="contactModal"
+    >
+        <div
+            class="modal-overlay"
+            id="modalOverlay"
+        ></div>
+        <div class="modal-card">
+            <button
+                type="button"
+                class="modal-close"
+                id="modalClose"
+                aria-label="Fechar"
+            >
+                ×
+            </button>
+            <span class="section-label">
+                DETALHES DO CONTATO
+            </span>
+            <h2 id="modalName">
+                —
+            </h2>
+            <div class="modal-data">
+                <div>
+                    <span>
+                        Empresa
+                    </span>
+                    <strong id="modalCompany">
+                        —
+                    </strong>
+                </div>
+                <div>
+                    <span>
+                        Contato
+                    </span>
+                    <strong id="modalContact">
+                        —
+                    </strong>
+                </div>
+                <div>
+                    <span>
+                        Serviço
+                    </span>
+                    <strong id="modalService">
+                        —
+                    </strong>
+                </div>
+                <div>
+                    <span>
+                        Recebido em
+                    </span>
+                    <strong id="modalDate">
+                        —
+                    </strong>
+                </div>
+            </div>
+            <!-- ========================================
+                 AÇÕES DE CONTATO
+            ========================================= -->
+            <div
+                class="modal-actions hidden"
+                id="modalActions"
+            >
+                <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="modal-action-button modal-action-whatsapp hidden"
+                    id="modalWhatsAppButton"
+                >
+                    Abrir WhatsApp
+                </a>
+                <a
+                    href="#"
+                    class="modal-action-button modal-action-email hidden"
+                    id="modalEmailButton"
+                >
+                    Enviar e-mail
+                </a>
+            </div>
+            <div class="modal-message">
+                <span>
+                    Mensagem
+                </span>
+                <p id="modalMessage">
+                    —
+                </p>
+            </div>
+            <!-- ========================================
+                 OBSERVAÇÕES INTERNAS
+            ========================================= -->
+            <div class="modal-notes">
+                <label for="modalNotes">
+                    Observações internas
+                </label>
+                <textarea
+                    id="modalNotes"
+                    rows="5"
+                    maxlength="3000"
+                    placeholder="Adicione informações importantes sobre este contato..."
+                ></textarea>
+                <div class="modal-notes-footer">
+                    <span>
+                        Visível somente no painel administrativo.
+                    </span>
+                    <span id="notesCounter">
+                        0/3000
+                    </span>
+                </div>
+            </div>
+            <!-- ========================================
+                 PRÓXIMO CONTATO
+            ========================================= -->
+            <div class="modal-followup">
+                <label for="modalFollowUp">
+                    Próximo contato
+                </label>
+                <input
+                    type="datetime-local"
+                    id="modalFollowUp"
+                >
+                <span class="modal-followup-hint">
+                    Defina quando este contato deve receber um novo retorno.
+                </span>
+            </div>
+            <div class="modal-status">
+                <label for="modalStatus">
+                    Status
+                </label>
+            <select id="modalStatus">
+                <option value="novo">
+                    Novo
+                </option>
+                <option value="em_contato">
+                    Em contato
+                </option>
+                <option value="follow_up">
+                    Follow-up
+                </option>
+                <option value="proposta">
+                    Proposta
+                </option>
+                <option value="aguardando_cliente">
+                    Aguardando cliente
+                </option>
+                <option value="fechado">
+                    Fechado
+                </option>
+                <option value="perdido">
+                    Perdidos
+                </option>
+            </select>
+            </div>
+                <!-- ========================================
+                     CLASSIFICAÇÃO COMERCIAL
+                ========================================= -->
+                <div class="modal-classification">
+                    <div class="modal-classification-field">
+                        <label for="modalOrigin">
+                            Origem do lead
+                        </label>
+                        <select id="modalOrigin">
+                            <option value="nao_informado">
+                                Não informado
+                            </option>
+                            <option value="site">
+                                Site
+                            </option>
+                            <option value="instagram">
+                                Instagram
+                            </option>
+                            <option value="whatsapp">
+                                WhatsApp
+                            </option>
+                            <option value="indicacao">
+                                Indicação
+                            </option>
+                            <option value="prospeccao">
+                                Prospecção
+                            </option>
+                            <option value="evento">
+                                Evento
+                            </option>
+                            <option value="google">
+                                Google
+                            </option>
+                            <option value="outro">
+                                Outro
+                            </option>
+                        </select>
+                    </div>
+                    <div class="modal-classification-field">
+                        <label for="modalTags">
+                            Tags
+                        </label>
+                        <input
+                            type="text"
+                            id="modalTags"
+                            maxlength="500"
+                            placeholder="Ex.: Clínica, Google Ads, Ticket alto"
+                            autocomplete="off"
+                        >
+                        <span class="modal-classification-hint">
+                            Separe as tags por vírgulas. Máximo de 12.
+                        </span>
+                    </div>
+                    <p
+                        class="modal-classification-error"
+                        id="classificationError"
+                    ></p>
+                </div>
+            <!-- ========================================
+                     MOTIVO DA PERDA
+                ========================================= -->
+                <div
+                    class="modal-loss-reason hidden"
+                    id="modalLossReasonGroup"
+                >
+                    <label for="modalLossReason">
+                        Motivo da perda
+                    </label>
+                    <select id="modalLossReason">
+                        <option value="">
+                            Selecione um motivo
+                        </option>
+                        <option value="preco">
+                            Preço / orçamento
+                        </option>
+                        <option value="concorrente">
+                            Escolheu concorrente
+                        </option>
+                        <option value="sem_retorno">
+                            Sem retorno
+                        </option>
+                        <option value="sem_fit">
+                            Sem fit
+                        </option>
+                        <option value="projeto_adiado">
+                            Projeto adiado
+                        </option>
+                        <option value="desqualificado">
+                            Lead desqualificado
+                        </option>
+                        <option value="outro">
+                            Outro
+                        </option>
+                    </select>
+                    <span
+                        class="modal-loss-reason-error"
+                        id="lossReasonError"
+                    ></span>
+                </div>
+            <button
+                type="button"
+                class="save-status-button"
+                id="saveStatusButton"
+            >
+                Salvar alteração
+            </button>
+            <button
+                type="button"
+                class="archive-contact-button hidden"
+                id="archiveContactButton"
+            >
+                Arquivar contato
+            </button>
+            <!-- ========================================
+                 HISTÓRICO DO CONTATO — OWNER
+            ========================================= -->
+            <section
+                class="contact-history hidden"
+                id="contactHistorySection"
+            >
+                <div class="contact-history-header">
+                    <div>
+                        <span class="section-label">
+                            CONTROLE INTERNO
+                        </span>
+                        <h3>
+                            Histórico do contato
+                        </h3>
+                    </div>
+                    <span
+                        class="contact-history-count"
+                        id="contactHistoryCount"
+                    >
+                        0 registros
+                    </span>
+                </div>
+                <div
+                    class="contact-history-list"
+                    id="contactHistoryList"
+                >
+                    <div class="contact-history-empty">
+                        Nenhum histórico disponível.
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+<!-- ========================================
+     EDIÇÃO FINANCEIRA — OWNER
+========================================= -->
+<div
+    class="contact-modal finance-edit-modal hidden"
+    id="financeEditModal"
+>
+    <div
+        class="modal-overlay"
+        id="financeEditModalOverlay"
+    ></div>
+    <div class="modal-card finance-edit-card">
+        <button
+            type="button"
+            class="modal-close"
+            id="financeEditModalClose"
+            aria-label="Fechar"
+        >
+            ×
+        </button>
+        <span class="section-label">
+            GESTÃO FINANCEIRA
+        </span>
+        <h2>
+            Editar contrato
+        </h2>
+        <p class="finance-edit-intro">
+            Corrija os dados financeiros registrados
+            para este contrato.
+        </p>
+        <div class="finance-edit-client">
+            <span>
+                CLIENTE
+            </span>
+            <strong id="financeEditClientName">
+                —
+            </strong>
+        </div>
+        <div class="finance-edit-fields">
+            <label>
+                <span>
+                    Valor do contrato
+                </span>
+                <input
+                    type="text"
+                    id="financeEditValue"
+                    placeholder="R$ 0,00"
+                    autocomplete="off"
+                >
+            </label>
+            <label>
+                <span>
+                    Tipo de cobrança
+                </span>
+                <select id="financeEditBillingType">
+                    <option value="monthly">
+                        Mensal
+                    </option>
+                    <option value="one_time">
+                        Pagamento único
+                    </option>
+                </select>
+            </label>
+            <label>
+                <span>
+                    Vencimento
+                </span>
+                <input
+                    type="date"
+                    id="financeEditPaymentDate"
+                >
+            </label>
+            <label
+                id="financeEditRecurringGroup"
+            >
+                <span>
+                    Dia recorrente
+                </span>
+                <input
+                    type="number"
+                    id="financeEditRecurringDay"
+                    min="1"
+                    max="31"
+                    placeholder="10"
+                >
+            </label>
+        </div>
+        <p
+            class="finance-edit-error"
+            id="financeEditError"
+        ></p>
+        <div class="finance-edit-actions">
+            <button
+                type="button"
+                class="finance-edit-cancel"
+                id="financeEditCancelButton"
+            >
+                Cancelar
+            </button>
+            <button
+                type="button"
+                class="finance-edit-save"
+                id="financeEditSaveButton"
+                disabled
+            >
+                Salvar alterações
+            </button>
+        </div>
+    </div>
+</div>
+<!-- ========================================
+     CONFIRMAÇÃO DE PAGAMENTO — OWNER
+========================================= -->
+<div
+    class="contact-modal payment-modal hidden"
+    id="paymentModal"
+>
+    <div
+        class="modal-overlay"
+        id="paymentModalOverlay"
+    ></div>
+    <div class="modal-card payment-card">
+        <button
+            type="button"
+            class="modal-close"
+            id="paymentModalClose"
+            aria-label="Fechar"
+        >
+            ×
+        </button>
+        <span class="section-label">
+            CONTROLE FINANCEIRO
+        </span>
+        <h2>
+            Confirmar pagamento
+        </h2>
+        <p class="payment-intro">
+            Confirme o recebimento antes de alterar
+            a situação financeira deste contrato.
+        </p>
+        <div class="payment-summary">
+            <div>
+                <span>Cliente</span>
+                <strong id="paymentClientName">
+                    —
+                </strong>
+            </div>
+            <div>
+                <span>Valor</span>
+                <strong id="paymentContractValue">
+                    —
+                </strong>
+            </div>
+            <div>
+                <span>Vencimento</span>
+                <strong id="paymentDueDate">
+                    —
+                </strong>
+            </div>
+            <div>
+                <span>Situação atual</span>
+                <strong id="paymentCurrentStatus">
+                    —
+                </strong>
+            </div>
+        </div>
+        <p
+            class="payment-error"
+            id="paymentError"
+        ></p>
+        <div class="payment-actions">
+            <button
+                type="button"
+                class="payment-cancel-button"
+                id="paymentCancelButton"
+            >
+                Cancelar
+            </button>
+            <button
+                type="button"
+                class="payment-confirm-button"
+                id="paymentConfirmButton"
+            >
+                Confirmar pagamento
+            </button>
+        </div>
+    </div>
+</div>
+<!-- ========================================
+     HISTÓRICO DE PAGAMENTOS — OWNER
+========================================= -->
+<div
+    class="contact-modal payment-history-modal hidden"
+    id="paymentHistoryModal"
+>
+    <div
+        class="modal-overlay"
+        id="paymentHistoryModalOverlay"
+    ></div>
+    <div class="modal-card payment-history-card">
+        <button
+            type="button"
+            class="modal-close"
+            id="paymentHistoryModalClose"
+            aria-label="Fechar"
+        >
+            ×
+        </button>
+        <span class="section-label">
+            HISTÓRICO FINANCEIRO
+        </span>
+        <h2>
+            Histórico de pagamentos
+        </h2>
+        <p class="payment-history-intro">
+            Consulte os recebimentos registrados
+            para este contrato.
+        </p>
+        <div class="payment-history-client">
+            <span>
+                CLIENTE
+            </span>
+            <strong id="paymentHistoryClientName">
+                —
+            </strong>
+            <small id="paymentHistoryContractInfo">
+                —
+            </small>
+        </div>
+        <div class="payment-history-heading">
+            <span id="paymentHistoryCount">
+                0 pagamentos
+            </span>
+        </div>
+        <div
+            class="payment-history-list"
+            id="paymentHistoryList"
+        >
+            <div class="payment-history-loading">
+                Carregando histórico...
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ========================================
+     NOVO LEAD MANUAL
+========================================= -->
+<div
+    class="contact-modal hidden"
+    id="manualContactModal"
+>
+    <div
+        class="modal-overlay"
+        id="manualContactOverlay"
+    ></div>
+    <div class="modal-card manual-contact-card">
+        <button
+            type="button"
+            class="modal-close"
+            id="manualContactClose"
+            aria-label="Fechar"
+        >
+            ×
+        </button>
+        <span class="section-label">
+            CADASTRO MANUAL
+        </span>
+        <h2>
+            Novo lead
+        </h2>
+        <p class="manual-contact-intro">
+            Adicione uma oportunidade recebida fora do formulário do site.
+        </p>
+        <form
+            class="manual-contact-form"
+            id="manualContactForm"
+        >
+            <!-- NOME -->
+            <div class="manual-form-field">
+                <label for="manualName">
+                    Nome
+                    <span>*</span>
+                </label>
+                <input
+                    type="text"
+                    id="manualName"
+                    maxlength="120"
+                    autocomplete="off"
+                    required
+                >
+            </div>
+            <!-- EMPRESA -->
+            <div class="manual-form-field">
+                <label for="manualCompany">
+                    Empresa
+                </label>
+                <input
+                    type="text"
+                    id="manualCompany"
+                    maxlength="160"
+                    autocomplete="off"
+                >
+            </div>
+            <!-- CONTATO -->
+            <div class="manual-form-field manual-form-full">
+                <label for="manualContact">
+                    WhatsApp, e-mail ou contato
+                    <span>*</span>
+                </label>
+                <input
+                    type="text"
+                    id="manualContact"
+                    maxlength="250"
+                    placeholder="Ex.: (11) 99999-9999 ou nome@empresa.com"
+                    autocomplete="off"
+                    required
+                >
+            </div>
+           <!-- SERVIÇO -->
+            <div class="manual-form-field">
+                <label for="manualService">
+                    Serviço de interesse
+                </label>
+                <select id="manualService">
+                    <option value="">
+                        Não definido
+                    </option>
+                    <option value="Tráfego Pago">
+                        Tráfego Pago
+                    </option>
+                    <option value="Gestão Total">
+                        Gestão Total
+                    </option>
+                    <option value="Criação de Sites">
+                        Criação de Sites
+                    </option>
+                    <option value="Consultoria Estratégica">
+                        Consultoria Estratégica
+                    </option>
+                    <option value="Projeto personalizado">
+                        Projeto personalizado
+                    </option>
+                </select>
+            </div>
+            <!-- ORIGEM -->
+            <div class="manual-form-field">
+                <label for="manualOrigin">
+                    Origem do lead
+                </label>
+                <select id="manualOrigin">
+                    <option
+                        value="nao_informado"
+                        selected
+                    >
+                        Não informado
+                    </option>
+                    <option value="site">
+                        Site
+                    </option>
+                    <option value="instagram">
+                        Instagram
+                    </option>
+                    <option value="whatsapp">
+                        WhatsApp
+                    </option>
+                    <option value="indicacao">
+                        Indicação
+                    </option>
+                    <option value="prospeccao">
+                        Prospecção
+                    </option>
+                    <option value="evento">
+                        Evento
+                    </option>
+                    <option value="google">
+                        Google
+                    </option>
+                    <option value="outro">
+                        Outro
+                    </option>
+                </select>
+            </div>
+            <!-- PRÓXIMO CONTATO -->
+            <div class="manual-form-field">
+                <label for="manualNextContactAt">
+                    Próximo contato
+                </label>
+                <input
+                    type="datetime-local"
+                    id="manualNextContactAt"
+                >
+            </div>
+            <!-- TAGS -->
+            <div class="manual-form-field">
+                <label for="manualTags">
+                    Tags
+                </label>
+                <input
+                    type="text"
+                    id="manualTags"
+                    maxlength="500"
+                    placeholder="Ex.: Clínica, Google Ads, Ticket alto"
+                    autocomplete="off"
+                >
+                <small class="manual-form-hint">
+                    Separe as tags por vírgulas. Máximo de 12.
+                </small>
+            </div>
+            <!-- MENSAGEM -->
+            <div class="manual-form-field manual-form-full">
+                <label for="manualMessage">
+                    Contexto / mensagem
+                </label>
+                <textarea
+                    id="manualMessage"
+                    rows="4"
+                    maxlength="2000"
+                    placeholder="Ex.: Lead recebido por indicação e interessado em Google Ads."
+                ></textarea>
+            </div>
+            <!-- OBSERVAÇÕES -->
+            <div class="manual-form-field manual-form-full">
+                <label for="manualNotes">
+                    Observações internas
+                </label>
+                <textarea
+                    id="manualNotes"
+                    rows="4"
+                    maxlength="3000"
+                    placeholder="Informações internas importantes para o atendimento."
+                ></textarea>
+            </div>
+            <!-- INFORMAÇÃO -->
+            <div class="manual-contact-info manual-form-full">
+                <span>
+                    Status inicial
+                </span>
+                <strong>
+                    Novo
+                </strong>
+                <small>
+                    Leads cadastrados manualmente entram automaticamente como novos.
+                </small>
+            </div>
+            <p
+                class="manual-create-error manual-form-full"
+                id="manualCreateError"
+            ></p>
+            <button
+                type="button"
+                class="manual-create-button manual-form-full"
+                id="createManualContactButton"
+            >
+                Criar lead
+            </button>
+        </form>
+    </div>
+</div>
+<!-- ========================================
+     FECHAMENTO DE VENDA
+========================================= -->
+<div
+    class="contact-modal closing-modal hidden"
+    id="closingModal"
+>
+    <div
+        class="modal-overlay"
+        id="closingModalOverlay"
+    ></div>
+    <div class="modal-card closing-card">
+        <button
+            type="button"
+            class="modal-close"
+            id="closingModalClose"
+            aria-label="Fechar"
+        >
+            ×
+        </button>
+        <span class="section-label">
+            FECHAMENTO
+        </span>
+        <h2>
+            Fechar venda
+        </h2>
+        <p class="closing-intro">
+            Confirme os dados comerciais acordados
+            com o cliente antes de concluir a venda.
+        </p>
+        <div class="closing-client">
+            <span>
+                Cliente
+            </span>
+            <strong id="closingClientName">
+                —
+            </strong>
+        </div>
+        <div class="closing-form">
+            <div class="closing-field">
+                <label for="closingValue">
+                    Valor fechado
+                    <span>*</span>
+                </label>
+                <div class="closing-money">
+                    <span>
+                        R$
+                    </span>
+                    <input
+                        type="text"
+                        id="closingValue"
+                        inputmode="decimal"
+                        placeholder="0,00"
+                        autocomplete="off"
+                    >
+                </div>
+            </div>
+            <div class="closing-field">
+                <label for="closingBillingType">
+                    Tipo de cobrança
+                    <span>*</span>
+                </label>
+                <select id="closingBillingType">
+                    <option value="monthly">
+                        Mensal
+                    </option>
+                    <option value="one_time">
+                        Pagamento único
+                    </option>
+                </select>
+            </div>
+            <div class="closing-field">
+                <label for="closingPaymentDate">
+                    Primeiro pagamento
+                    <span>*</span>
+                </label>
+                <input
+                    type="date"
+                    id="closingPaymentDate"
+                >
+            </div>
+            <div
+                class="closing-field"
+                id="closingRecurringGroup"
+            >
+                <label for="closingRecurringDay">
+                    Dia recorrente
+                    <span>*</span>
+                </label>
+                <input
+                    type="number"
+                    id="closingRecurringDay"
+                    min="1"
+                    max="31"
+                    step="1"
+                    placeholder="Ex.: 10"
+                >
+                <small>
+                    Dia previsto para os próximos pagamentos mensais.
+                </small>
+            </div>
+            <p
+                class="closing-error"
+                id="closingError"
+            ></p>
+            <div class="closing-actions">
+                <button
+                    type="button"
+                    class="closing-cancel-button"
+                    id="closingCancelButton"
+                >
+                    Cancelar
+                </button>
+                <button
+                    type="button"
+                    class="closing-confirm-button"
+                    id="closingConfirmButton"
+                    disabled
+                >
+                    Confirmar fechamento
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+    <script
+        src="/assets/chart.umd.min.js"
+    ></script>
+    <script
+        type="module"
+        src="/admin/admin.js"
+    ></script>
+    <script type="module" src="/admin/demo-ui.js"></script>
+</body>
+</html>
