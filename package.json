@@ -1,8 +1,0 @@
-{
-  "name": "roasce-crm-demo",
-  "version": "1.0.0",
-  "private": true,
-  "type": "module",
-  "description": "Demonstração estática e independente do CRM ROASCE",
-  "scripts": { "start": "node serve.mjs", "test": "node --test tests/demo.test.mjs" }
-}
